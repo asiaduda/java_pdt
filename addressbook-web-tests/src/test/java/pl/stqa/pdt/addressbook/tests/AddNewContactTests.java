@@ -11,6 +11,7 @@ public class AddNewContactTests extends TestBase {
     app.getContactHelper().gotoAddNewPage();
     app.getContactHelper().fillContactForm(new Contact("Asia", "Duda", "Kraków", "111333222", "a@b.com"));
     app.getContactHelper().submitAddContact();
+    app.getContactHelper().returnToHomePage();
   }
 
 
