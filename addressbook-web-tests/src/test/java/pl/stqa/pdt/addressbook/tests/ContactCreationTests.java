@@ -1,15 +1,16 @@
 package pl.stqa.pdt.addressbook.tests;
 
 import org.testng.annotations.Test;
-import pl.stqa.pdt.addressbook.model.Contact;
+import pl.stqa.pdt.addressbook.model.ContactData;
 
-public class AddNewContactTests extends TestBase {
+public class ContactCreationTests extends TestBase {
 
 
   @Test
   public void testAddNewContact() {
     app.getContactHelper().gotoAddNewPage();
-    app.getContactHelper().fillContactForm(new Contact("Asia", "Duda", "Kraków", "111333222", "a@b.com"));
+    app.getContactHelper().fillContactForm(new ContactData("Asia", "Duda", "Kraków",
+            "111333222", "a@b.com", "test1"),true);
     app.getContactHelper().submitAddContact();
     app.getContactHelper().returnToHomePage();
   }
