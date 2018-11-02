@@ -46,8 +46,8 @@ public class ContactHelper extends HelperBase{
   }
 
 
-  public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void initContactModification(ContactData contact) {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[td[1]/input[@id="+contact.getId()+"]]/td[8]/a/img"));
   }
 
   public void submitContactModification() {
@@ -74,8 +74,7 @@ public class ContactHelper extends HelperBase{
   }
 
   public void modify(ContactData contact) {
-    selectContactById(contact.getId());
-    initContactModification();
+    initContactModification(contact);
     fillContactForm(contact,false);
     submitContactModification();
     returnToHomePage();
