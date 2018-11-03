@@ -5,17 +5,79 @@ import java.util.Objects;
 public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstname;
+  private String middleName;
   private String lastname;
+  private String nickName;
+  private String company;
+  private String title;
   private String address;
   private String home;
   private String mobile;
   private String work;
   private String allPhones;
+  private String fax;
   private String email;
   private String email2;
   private String email3;
+  private String homepage;
   private String allEmails;
   private String group;
+
+
+  public String getMiddleName() {
+    return middleName;
+  }
+
+  public ContactData withMiddleName(String middleName) {
+    this.middleName = middleName;
+    return this;
+  }
+
+  public String getNickName() {
+    return nickName;
+  }
+
+  public ContactData withNickName(String nickName) {
+    this.nickName = nickName;
+    return this;
+  }
+
+  public String getCompany() {
+    return company;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public String getFax() {
+    return fax;
+  }
+
+  public ContactData withFax(String fax) {
+    this.fax = fax;
+    return this;
+  }
+
+  public String getHomepage() {
+    return homepage;
+  }
+
+  public ContactData withHomepage(String homepage) {
+    this.homepage = homepage;
+    return this;
+  }
+
 
   public String getEmail2() {
     return email2;

@@ -1,7 +1,5 @@
 package pl.stqa.pdt.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.stqa.pdt.addressbook.model.ContactData;
