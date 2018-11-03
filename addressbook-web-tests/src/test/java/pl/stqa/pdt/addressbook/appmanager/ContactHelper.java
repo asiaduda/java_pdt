@@ -8,9 +8,7 @@ import org.testng.Assert;
 import pl.stqa.pdt.addressbook.model.ContactData;
 import pl.stqa.pdt.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -26,7 +24,7 @@ public class ContactHelper extends HelperBase{
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
-    type(By.name("home"), contactData.getHome());
+    type(By.name("home"), contactData.getHomePhone());
     type(By.name("email"), contactData.getEmail());
 
     if (creation){
@@ -46,8 +44,8 @@ public class ContactHelper extends HelperBase{
   }
 
 
-  public void initContactModification(ContactData contact) {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[td[1]/input[@id="+contact.getId()+"]]/td[8]/a/img"));
+  public void initContactModification(int id) {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[td[1]/input[@id="+id+"]]/td[8]/a/img"));
   }
 
   public void submitContactModification() {
@@ -70,15 +68,13 @@ public class ContactHelper extends HelperBase{
     gotoAddNewPage();
     fillContactForm(contact,true);
     submitAddContact();
-    contactCache = null;
     returnToHomePage();
   }
 
   public void modify(ContactData contact) {
-    initContactModification(contact);
+    initContactModification(contact.getId());
     fillContactForm(contact,false);
     submitContactModification();
-    contactCache = null;
     returnToHomePage();
   }
 
@@ -86,7 +82,6 @@ public class ContactHelper extends HelperBase{
     selectContactById(contact.getId());
     deleteSelectedContact();
     confirmContactDeletion();
-    contactCache = null;
   }
 
   public boolean isThereAContact() {
@@ -97,21 +92,32 @@ public class ContactHelper extends HelperBase{
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  private Contacts contactCache = null;
 
   public Contacts all() {
-    if (contactCache != null){
-      return new Contacts(contactCache);
-    }
-    contactCache = new Contacts();
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for(WebElement element: elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
-      String firstname = cells.get(2).getText();
-      String lastname = cells.get(1).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      String allPhones = cells.get(5).getText();
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withAllPhones(allPhones));
     }
-    return new Contacts(contactCache);
+    return contacts;
   }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModification(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+  }
+
 }
