@@ -48,7 +48,7 @@ public class ContactHelper extends HelperBase{
 
 
   public void initContactModification(int id) {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[td[1]/input[@id="+id+"]]/td[8]/a/img"));
+    click(By.cssSelector("a[href='edit.php?id=" + id + "']"));
   }
 
   public void submitContactModification() {
