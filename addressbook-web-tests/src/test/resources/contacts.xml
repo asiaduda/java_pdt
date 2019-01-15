@@ -1,0 +1,20 @@
+<list>
+  <contact>
+    <firstname>Imie 0</firstname>
+    <lastname>Nazwisko 0</lastname>
+    <address>Adres 0</address>
+    <email>Email0@edu.pl</email>
+  </contact>
+  <contact>
+    <firstname>Imie 1</firstname>
+    <lastname>Nazwisko 1</lastname>
+    <address>Adres 1</address>
+    <email>Email1@edu.pl</email>
+  </contact>
+  <contact>
+    <firstname>Imie 2</firstname>
+    <lastname>Nazwisko 2</lastname>
+    <address>Adres 2</address>
+    <email>Email2@edu.pl</email>
+  </contact>
+</list>
