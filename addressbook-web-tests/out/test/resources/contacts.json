@@ -1,0 +1,23 @@
+[
+  {
+    "id": 2147483647,
+    "firstname": "Imie 0",
+    "lastname": "Nazwisko 0",
+    "address": "Adres 0",
+    "email": "Email0@edu.pl"
+  },
+  {
+    "id": 2147483647,
+    "firstname": "Imie 1",
+    "lastname": "Nazwisko 1",
+    "address": "Adres 1",
+    "email": "Email1@edu.pl"
+  },
+  {
+    "id": 2147483647,
+    "firstname": "Imie 2",
+    "lastname": "Nazwisko 2",
+    "address": "Adres 2",
+    "email": "Email2@edu.pl"
+  }
+]
