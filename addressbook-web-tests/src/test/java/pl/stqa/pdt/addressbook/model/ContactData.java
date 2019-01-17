@@ -3,44 +3,99 @@ package pl.stqa.pdt.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+
   @XStreamOmitField
+  @Id
+  @Column(name =  "Id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name =  "firstname")
   private String firstname;
+
+  @Column(name =  "middlename")
   private String middleName;
+
   @Expose
+  @Column(name =  "lastname")
   private String lastname;
+
+  @Column(name =  "nickname")
   private String nickName;
+
+  @Column(name =  "company")
   private String company;
+
+  @Column(name =  "title")
   private String title;
+
   @Expose
+  @Column(name =  "address")
+  @Type(type = "text")
   private String address;
+
+  @Column(name =  "home")
+  @Type(type = "text")
   private String home;
+
+  @Column(name =  "mobile")
+  @Type(type = "text")
   private String mobile;
+
+  @Column(name =  "work")
+  @Type(type = "text")
   private String work;
+
+  @Transient
   private String allPhones;
+
+  @Column(name =  "fax")
+  @Type(type = "text")
   private String fax;
+
   @Expose
+  @Column(name =  "email")
+  @Type(type = "text")
   private String email;
+
+  @Column(name =  "email2")
+  @Type(type = "text")
   private String email2;
+
+  @Column(name =  "email3")
+  @Type(type = "text")
   private String email3;
+
+  @Column(name =  "homepage")
+  @Type(type = "text")
   private String homepage;
+
+  @Transient
   private String allEmails;
+
+  @Transient
   private String group;
-  private File photo;
+
+  @Column(name =  "photo")
+  @Type(type = "text")
+  private String photo;
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
