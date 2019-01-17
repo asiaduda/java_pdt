@@ -91,6 +91,9 @@ public class ContactData {
   private String photo;
 
   public File getPhoto() {
+    if (photo == null){
+      return null;
+    }
     return new File(photo);
   }
 
