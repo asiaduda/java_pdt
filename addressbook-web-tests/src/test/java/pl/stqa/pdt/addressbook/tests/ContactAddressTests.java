@@ -14,7 +14,7 @@ public class ContactAddressTests extends TestBase {
     if(app.contact().all().size() == 0){
       app.contact().create(new ContactData()
               .withFirstname("Asia").withLastname("Bebe").withAddress("Krk")
-              .withHomePhone("111").withEmail("a@b.com").withGroup("test1"),true);
+              .withHomePhone("111").withEmail("a@b.com"),true);
     }
   }
 

@@ -3,6 +3,7 @@ package pl.stqa.pdt.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import pl.stqa.pdt.addressbook.model.ContactData;
 
 public class NavigationHelper extends HelperBase{
 
@@ -25,4 +26,5 @@ public class NavigationHelper extends HelperBase{
     }
     click(By.linkText("home"));
   }
+
 }

@@ -7,6 +7,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.stqa.pdt.addressbook.model.ContactData;
 import pl.stqa.pdt.addressbook.model.Contacts;
+import pl.stqa.pdt.addressbook.model.GroupData;
+import pl.stqa.pdt.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -61,16 +63,24 @@ public class ContactCreationTests extends TestBase {
 
   }
 
-  @Test(enabled = false)
-  public void testAddNewBadContact() {
+  @Test
+  public void testAddNewContactNotFromFile() {
+    if (app.group().count() == 0)
+      app.group().create(new GroupData().withName("First group"));
+    Groups groups = app.db().groups();
+
+    File photo = new File("src/test/resources/pictr.png");
+    ContactData newContact = new ContactData()
+            .withFirstname("Ania").withLastname("Nowak").withAddress("Krakow")
+            .withHomePhone("111333222").withEmail("a@b.com").withPhoto(photo)
+            .inGroup(groups.iterator().next());
+    app.goTo().homePage();
     Contacts before = app.db().contacts();
-    ContactData contact = new ContactData()
-            .withFirstname("Ania'").withLastname("Nowak").withAddress("Krakow")
-            .withHomePhone("111333222").withEmail("a@b.com").withGroup("test1");
-    app.contact().create(contact,true);
-    assertThat(app.contact().count(), equalTo(before.size()));
+    app.contact().create(newContact,true);
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
-    assertThat(after, equalTo(before));
+    assertThat(after, equalTo(
+            before.withAdded(newContact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
 
